@@ -1,9 +1,9 @@
 import React from 'react';
-import { Dialog, DialogTitle, DialogContent, TextField, DialogActions, Button, IconButton } from '@material-ui/core';
-import { CardItem } from '../contract/contract';
+import { Dialog, DialogTitle, DialogContent, TextField,  Button, IconButton } from '@material-ui/core';
 import SaveIcon from '@material-ui/icons/Save';
 import { styles } from './Style';
 import CloseIcon from '@material-ui/icons/Close';
+import DeleteIcon from '@material-ui/icons/Delete';
 
 
 interface IAddItemProps {
@@ -13,6 +13,7 @@ interface IAddItemProps {
     closeDialog: any;
     isEditView?: boolean;
     editValue?: any;
+    deletItem?: Function;
 }
 
 interface IAddItemStates {
@@ -35,6 +36,12 @@ export class AddItem extends React.Component<IAddItemProps, IAddItemStates> {
 
     saveItem = () => {
         this.props.onAddItem(this.state.newItemDescription)
+    }
+
+    deletItem = () => {
+        if (this.props.deletItem) {
+            this.props.deletItem()
+        }
     }
 
     render() {
@@ -60,6 +67,7 @@ export class AddItem extends React.Component<IAddItemProps, IAddItemStates> {
                         </DialogTitle>
                         <DialogContent style={styles.dialogContent}>
                             <TextField
+                                autoFocus
                                 required
                                 margin="dense"
                                 id={this.props.title + "Name"}
@@ -71,34 +79,45 @@ export class AddItem extends React.Component<IAddItemProps, IAddItemStates> {
                                 onChange={this.handleChange}
                             />
                         </DialogContent>
-                        <DialogActions style={styles.dialogActions} className="layout-row layout-align-space-around-center">
-
-                            <Button
-                                variant="contained"
-                                color="default"
-                                size="small"
-                                style={styles.dialogButton}
-                                onClick={this.props.closeDialog}>
-                                Cancel
+                        <div style={styles.dialogActions} className="layout-row layout-align-space-between-center">
+                            <div>
+                                {this.props.isEditView && <Button
+                                    variant="contained"
+                                    color="default"
+                                    size="small"
+                                    style={styles.dialogButton}
+                                    onClick={this.deletItem}>
+                                    <DeleteIcon style={styles.buttonIcon} />
+                                    {"Delete " + this.props.title}
+                                </Button>}
+                            </div>
+                            <div className="layout-row layout-align-end-center">
+                                <Button
+                                    variant="contained"
+                                    color="default"
+                                    size="small"
+                                    style={styles.dialogButton}
+                                    onClick={this.props.closeDialog}>
+                                    Cancel
                                 </Button>
 
-                            <Button
-                                variant="contained"
-                                color="default"
-                                size="small"
-                                style={styles.dialogButton}
-                                disabled={!this.state.newItemDescription}
-                                onClick={this.saveItem}>
-                                <SaveIcon />
-                                Save
+                                <Button
+                                    variant="contained"
+                                    color="default"
+                                    size="small"
+                                    style={styles.dialogButton}
+                                    disabled={!this.state.newItemDescription}
+                                    onClick={this.saveItem}>
+                                    <SaveIcon style={styles.buttonIcon} />
+                                    Save
                                 </Button>
-
-                        </DialogActions>
+                            </div>
+                        </div>
 
                     </div>
                 </Dialog>
 
-            </React.Fragment>
+            </React.Fragment >
         )
     }
 }

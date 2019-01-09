@@ -5,12 +5,20 @@ import ListItem from './ListItem';
 import { styles } from './Style';
 import AddIcon from '@material-ui/icons/Add';
 import AddItem from './AddItem';
+import SaveIcon from '@material-ui/icons/Save';
+import RefreshIcon from '@material-ui/icons/Refresh';
+
 
 interface IListViewProps {
     List: List[];
     addNewCard: Function;
     addNewList: Function;
     onSaveCard: Function;
+    onDeleteCard: Function;
+    onDeleteList: Function;
+    onSaveListItem: Function;
+    onSaveListData: Function;
+    onNewBoard: Function;
 }
 
 interface IListViewStates {
@@ -38,12 +46,25 @@ export class ListView extends React.Component<IListViewProps, IListViewStates> {
         this.closeDialog()
     }
 
-    getListItems = () => {
-        return this.props.List.map(listItem =>
-            (<ListItem ListItem={listItem} key={listItem.id} addNewCard={this.props.addNewCard}
-                onSaveCard={this.props.onSaveCard} />))
+    onSaveListData = () => {
+        this.props.onSaveListData()
     }
 
+    onNewBoard =() =>{
+        this.props.onNewBoard()
+    }
+
+    getListItems = () => {
+        return this.props.List.map(listItem =>
+            (<ListItem
+                ListItem={listItem}
+                key={listItem.id}
+                addNewCard={this.props.addNewCard}
+                onSaveCard={this.props.onSaveCard}
+                onDeleteCard={this.props.onDeleteCard}
+                onDeleteList={this.props.onDeleteList}
+                onSaveListItem={this.props.onSaveListItem} />))
+    }
 
     render() {
 
@@ -53,14 +74,37 @@ export class ListView extends React.Component<IListViewProps, IListViewStates> {
                 <div className="layout-row layout-align-center" style={styles.itemPB}>
                     {listItems}
 
-                    <Card style={styles.listAddListItem} onClick={this.openDialog}>
-                        <CardActionArea style={styles.listAddButton}>
-                            <div className="layout-row layout-align-space-around-center">
-                                <AddIcon />
-                                <span color="white">Add New List</span>
-                            </div>
-                        </CardActionArea>
-                    </Card>
+                    <div>
+                        <Card style={styles.listAddListItem} onClick={this.openDialog}>
+                            <CardActionArea style={styles.listAddButton}>
+                                <div className="layout-row layout-align-space-around-center">
+                                    <AddIcon />
+                                    <span color="white">Add New List</span>
+                                </div>
+                            </CardActionArea>
+                        </Card>
+
+                        <Card style={styles.listAddListItem} onClick={this.onSaveListData}>
+                            <CardActionArea style={styles.listAddButton}>
+                                <div className="layout-row layout-align-space-around-center">
+                                    <SaveIcon />
+                                    <span color="white">Save Board</span>
+                                </div>
+                            </CardActionArea>
+                        </Card>
+
+                        <Card style={styles.listAddListItem} onClick={this.onNewBoard}>
+                            <CardActionArea style={styles.listAddButton}>
+                                <div className="layout-row layout-align-space-around-center">
+                                    <RefreshIcon />
+                                    <span color="white">New Board</span>
+                                </div>
+                            </CardActionArea>
+                        </Card>
+
+                    </div>
+
+                    {/* Add a new List */}
 
                     {this.state.openAddItemDailog &&
                         <AddItem

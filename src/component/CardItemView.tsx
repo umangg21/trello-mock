@@ -7,6 +7,7 @@ import AddItem from './AddItem';
 interface ICardItemViewProps {
     cardItem: CardItem;
     onSaveCard: Function;
+    onDeleteCard: Function;
 }
 
 interface ICardItemViewStates {
@@ -33,6 +34,10 @@ export class CardItemView extends React.Component<ICardItemViewProps, ICardItemV
         this.closeDialog()
     }
 
+    onDeleteCard = () =>{
+        this.props.onDeleteCard(this.props.cardItem.id)
+    }
+
     render() {
         return (
             <React.Fragment>
@@ -44,6 +49,8 @@ export class CardItemView extends React.Component<ICardItemViewProps, ICardItemV
                     </CardActionArea>
                 </Card>
 
+                {/* Edit or Delete a card*/}
+
                 {this.state.openAddItemDailog && 
                 <AddItem
                         title="Card"
@@ -52,6 +59,7 @@ export class CardItemView extends React.Component<ICardItemViewProps, ICardItemV
                         onAddItem={this.onSaveCard}
                         isEditView= {true}
                         editValue={this.props.cardItem.description}
+                        deletItem= {this.onDeleteCard}
                 />}
 
             </React.Fragment>

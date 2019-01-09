@@ -58,4 +58,13 @@ export const styles = {
         border:`10px`
     },
 
+    buttonIcon:{
+        paddingRight: `10px`
+    },
+
+    editIconP:{
+        padding: `5px`,
+        color: `gray`
+    }
+
 }
