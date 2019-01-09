@@ -1,0 +1,64 @@
+{
+    "list":[
+        {
+            "id": 1,
+            "description": "Things should be study",
+            "cards":[
+                {
+                    "id": 1,
+                    "description": "TypeScript Variable declarations"
+                },
+                {
+                    "id": 2,
+                    "description": "React-Ga npm modules, classnames npm nodemodules"
+                },
+                {
+                    "id": 3,
+                    "description": "React Fragment Concept in React"
+                },
+                {
+                    "id": 4,
+                    "description": "autobind-deorator npm node modules"
+                }
+            ]
+        },
+        {
+            "id": 2,
+            "description": "Finish Items in Things should be study",
+            "cards":[
+                {
+                    "id": 1,
+                    "description": "Modules Creation"
+                },
+                {
+                    "id": 2,
+                    "description": "Component Development"
+                }
+            ]
+        },
+        {
+            "id": 3,
+            "description": "To DO List",
+            "cards":[
+                {
+                    "id": 1,
+                    "description": "Code Review"
+                },
+                {
+                    "id": 2,
+                    "description": "Code Check in"
+                }
+            ]
+        },
+        {
+            "id": 4,
+            "description": "In-Progress",
+            "cards":[
+                {
+                    "id": 1,
+                    "description": "Code Optimization"
+                }
+            ]
+        }
+    ]
+}
